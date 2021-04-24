@@ -77,67 +77,72 @@ export function PlantSave() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.plantInfo}>
-        <SvgFromUri
-          uri={plant.photo}
-          width={150}
-          height={150}
-        />
-
-        <Text style={styles.plantName}>
-          {plant.name}
-        </Text>
-        <Text style={styles.plantAbout}>
-          {plant.about}
-        </Text>
-      </View>
-      
-      <View style={styles.controller}>
-        <View style={styles.tip}>
-          <Image 
-            source={waterDrop} 
-            style={styles.tipImg}
+    <ScrollView 
+      showsVerticalScrollIndicator={false}
+      contentContainerStyle={styles.container}
+    >
+      <View style={styles.container}>
+        <View style={styles.plantInfo}>
+          <SvgFromUri
+            uri={plant.photo}
+            width={150}
+            height={150}
           />
 
-          <Text style={styles.tipText}>
-            {plant.water_tips}
+          <Text style={styles.plantName}>
+            {plant.name}
+          </Text>
+          <Text style={styles.plantAbout}>
+            {plant.about}
           </Text>
         </View>
+        
+        <View style={styles.controller}>
+          <View style={styles.tip}>
+            <Image 
+              source={waterDrop} 
+              style={styles.tipImg}
+            />
 
-        <Text style={styles.choose}>
-          Escolha o melhor horário para ser lembrado!
-        </Text>
+            <Text style={styles.tipText}>
+              {plant.water_tips}
+            </Text>
+          </View>
 
-        {
-          showDatePicker && (
-          <DateTimePicker 
-          value={selectedDate}
-          mode="time"
-          display="spinner"
-          onChange={handleTimeChange} 
-          />)
-        }
+          <Text style={styles.choose}>
+            Escolha o melhor horário para ser lembrado!
+          </Text>
 
-        {
-          Platform.OS === 'android' && (
-            <TouchableOpacity
-              style={styles.datePickerButton} 
-              onPress={() => {openAndroidDatePicker()}}
-            >
-              <Text style={styles.datePickerText}>
-                {`Mudar horário ${format(selectedDate, 'HH:mm')}`}
-              </Text>
-            </TouchableOpacity>
-          ) 
-        }
+          {
+            showDatePicker && (
+            <DateTimePicker 
+            value={selectedDate}
+            mode="time"
+            display="spinner"
+            onChange={handleTimeChange} 
+            />)
+          }
 
-        <Button
-          title="Cadastrar Planta"
-          onPress={handleSavePlant}
-        />
+          {
+            Platform.OS === 'android' && (
+              <TouchableOpacity
+                style={styles.datePickerButton} 
+                onPress={() => {openAndroidDatePicker()}}
+              >
+                <Text style={styles.datePickerText}>
+                  {`Mudar horário ${format(selectedDate, 'HH:mm')}`}
+                </Text>
+              </TouchableOpacity>
+            ) 
+          }
+
+          <Button
+            title="Cadastrar Planta"
+            onPress={handleSavePlant}
+          />
+        </View>
       </View>
-    </View>
+    </ScrollView>
   )
 }
 
